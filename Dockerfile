@@ -16,15 +16,20 @@ RUN useradd --create-home --home-dir $HOME user \
 RUN apt-get update && apt-get upgrade -y \
 	&& apt-get install -y \
 	git \
+	python3 \
+	ca-certificates \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir /home/user/GitHub
 
 # Clone GitHub repos
-COPY Git/git.py /home/user/GitHub/git.py
-COPY Git/repositories.csv /home/user/GitHub/repositories.csv
+COPY Git/ /home/user/Git
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN ln -s /usr/local/bin/docker-entrypoint.sh / && chmod +x /usr/local/bin/docker-entrypoint.sh
 	
 WORKDIR $HOME
 USER user
 
-#docker run -d -v //C/Users/domccl/Desktop/GitHub:/home/user/GitHub
+CMD ["docker-entrypoint.sh"]
+
+#docker run -d -v //C/Users/domccl/Desktop/GitHub:/home/user/GitHub --name=git dmccloskey/docker-git

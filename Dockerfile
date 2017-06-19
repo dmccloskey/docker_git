@@ -32,4 +32,12 @@ USER user
 
 CMD ["docker-entrypoint.sh"]
 
+##EXAMPLE USAGE:
+#docker build -t dmccloskey/docker-git .
 #docker run -d -v //C/Users/domccl/Desktop/GitHub:/home/user/GitHub --name=git dmccloskey/docker-git
+#docker exec -it git /bin/bash
+#python3
+#from Git.Git import Git
+#git = Git(email='dmccloskey87@gmail.com',username='dmccloskey',password='',repositories_csv='Git/repositories.csv')
+#git.make_sslCert()
+#git.clone_repositories()

@@ -47,7 +47,7 @@ class Git():
                     keys = reader.fieldnames
                     for row in reader:
                         #skip non-used lines
-                        if not d['used_'] or d['used_'] == "FALSE":
+                        if not row['used_'] or row['used_'] == "FALSE":
                             continue
                         else:
                             self.repositories[row['repository']] = row
@@ -70,8 +70,8 @@ class Git():
             #     row['branch'],self.username,row['repository']
             # )
             # os.system("echo %s" %(git_cmd)) # will show password on commandline!
-            os.system(change_dir_cmd)
-            os.system(git_cmd)
+            os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
+            os.system(os_cmd)
 
     def push_repositories(self,commit_message='Quick save'):
         """Push repositories
@@ -83,21 +83,23 @@ class Git():
             change_dir_cmd = '''cd %s/%s'''%(
                 self.git_directiory,row['repository']
             )
-            git_cmd = '''cd /home/user/GitHub/%s; git add .; git commit -m "%s"; git push origin %s''' %(
-                row['repository'],commit_message,row['branch']
+            git_cmd = '''git add .; git commit -m "%s"; git push origin %s''' %(
+                commit_message,row['branch']
             )
+            os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
             os.system("echo %s" %(git_cmd))
-            os.system(change_dir_cmd)
-            os.system(git_cmd)
+            os.system(os_cmd)
 
     def make_sslCert(self):
         """Create a ssl certificate for github
 
         """
+        change_dir_cmd = '''cd %s'''%(
+            self.git_directiory
+        )
         #enable ssl cert
-        os_cmd = '''git config --global http.sslVerify true '''
-        os.system("echo %s" %(os_cmd))
-        os.system(os_cmd)
+        ssl_cmd = '''git config --global http.sslVerify true '''
+        os.system("echo %s" %(ssl_cmd))
         #write new gitconfig file
         gitconfig_file = '''
 [http]
@@ -106,5 +108,6 @@ class Git():
 [user]
         email = %s
         name = %s''' %(self.email, self.username)     
-        os.system("rm -f gitconfig")
-        os.system('''echo "%s" > gitconfig''' %(gitconfig_file))
+        os_cmd = '''%s;%s;rm -f gitconfig;echo "%s" > gitconfig''' %(
+            change_dir_cmd, ssl_cmd, gitconfig_file)
+        os.system(os_cmd)

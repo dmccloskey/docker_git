@@ -46,7 +46,10 @@ class Git():
                 try:
                     keys = reader.fieldnames
                     for row in reader:
-                        if row['used_'] or row['used_']=="TRUE":
+                        #skip non-used lines
+                        if not d['used_'] or d['used_'] == "FALSE":
+                            continue
+                        else:
                             self.repositories[row['repository']] = row
                 except csv.Error as e:
                     sys.exit('file %s, line %d: %s' % (repositories_csv, reader.line_num, e))

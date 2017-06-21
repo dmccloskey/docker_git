@@ -35,6 +35,7 @@ CMD ["docker-entrypoint.sh"]
 ##EXAMPLE USAGE:
 #docker build -t dmccloskey/docker-git .
 #docker run -d -v //C/Users/domccl/Desktop/GitHub:/home/user/GitHub --name=git dmccloskey/docker-git
+#docker run -d -v //C/Users/dmccloskey/Documents/GitHub:/home/user/GitHub --name=git dmccloskey/docker-git
 #docker exec -it git /bin/bash
 #python3
 #from Git.Git import Git

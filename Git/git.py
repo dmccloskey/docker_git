@@ -56,16 +56,28 @@ class Git():
         except IOError as e:
             sys.exit('%s does not exist' % e)
 
-    def clone_repositories(self):
+    def clone_repositories(self,branch_only = False):
         """Clone git repositories
+
+        Args
+            branch_only (bool): only the HEAD of the specified branch is cloned
+
+        Options
+            'branch': name of the branch to clone
+            'repostiory': name of the repository
         """        
         for repository,row in self.repositories.items():
             change_dir_cmd = '''cd %s'''%(
                 self.git_directiory
             )
-            git_cmd = '''git clone -b %s https://%s:%s@github.com/%s/%s.git''' %(
-                row['branch'],self.username,self.password,self.username,row['repository']
-            )
+            if branch_only:
+                git_cmd = '''git clone -b %s https://%s:%s@github.com/%s/%s.git''' %(
+                    row['branch'],self.username,self.password,self.username,row['repository']
+                )
+            else:
+                git_cmd = '''git clone https://%s:%s@github.com/%s/%s.git; git checkout %s''' %(
+                    self.username,self.password,self.username,row['repository'],row['branch']
+                )
             # git_cmd = '''git clone -b %s https://github.com/%s/%s.git''' %(
             #     row['branch'],self.username,row['repository']
             # )
@@ -73,8 +85,38 @@ class Git():
             os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
             os.system(os_cmd)
 
-    def push_repositories(self,commit_message='Quick save'):
-        """Push repositories
+    def switch_branches(self,repositories = {}, new_branch = False):
+        """Switches branches for specified repositories
+
+        Args
+            repositories (dict): key, value where key = repository_name (str)
+                            value = branch_name (str)
+            new_branch (bool): create a new branch
+
+        Options
+            'branch': name of the branch to clone
+            'repostiory': name of the repository
+        """        
+        for repository,branch in self.repositories.items():
+            #update the branches
+            self.repositories[repository]['branch']=branch
+            #switch branchs
+            change_dir_cmd = '''cd %s'''%(
+                self.git_directiory
+            )
+            if new_branch:
+                git_cmd = '''git checkout -b %s''' %(
+                    row['branch']
+                )
+            else:
+                git_cmd = '''git checkout %s''' %(
+                    row['branch']
+                )
+            os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
+            os.system(os_cmd)
+
+    def save_repositories(self,commit_message='Quick save'):
+        """Add, Commit, and Push repositories
 
         Args
             commit_message (str): commit message
@@ -85,6 +127,23 @@ class Git():
             )
             git_cmd = '''git add .; git commit -m "%s"; git push origin %s''' %(
                 commit_message,row['branch']
+            )
+            os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
+            os.system("echo %s" %(git_cmd))
+            os.system(os_cmd)
+
+    def sync_repositories(self,commit_message='Quick save'):
+        """pull repositories
+
+        Args
+            commit_message (str): commit message
+        """
+        for repository,row in self.repositories.items():
+            change_dir_cmd = '''cd %s/%s'''%(
+                self.git_directiory,row['repository']
+            )
+            git_cmd = '''git pull origin %s''' %(
+                row['branch']
             )
             os_cmd = '''%s;%s''' %(change_dir_cmd, git_cmd)
             os.system("echo %s" %(git_cmd))

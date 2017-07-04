@@ -2,10 +2,7 @@ repository,branch,used_,comment_
 bowtie1,master,FALSE,sequtils_test
 bowtie2,master,FALSE,sequtils_test
 breseq,master,FALSE,sequtils_test
-calculate_utilities,master,FALSE,delete
 chemioinformatics_utilities,master,FALSE,
-COBRA_multi-omics_analysis,master,FALSE,delete
-cobrapy,master,FALSE,delete
 component-contribution,master,TRUE,SBaaS
 cufflinks,master,FALSE,sequtils_test
 ddt,master,TRUE,
@@ -17,7 +14,6 @@ docker_openms,master,TRUE,
 docker_postgres,master,TRUE,
 docker_proteoWizard,master,TRUE,
 docker_vsc,master,FALSE,
-escher,master,FALSE,delete
 free-programming-books,master,FALSE,
 genomeScale_MFA,master,TRUE,SBaaS
 genomeScale_MFA_INCA,master,TRUE,SBaaS
@@ -31,8 +27,7 @@ matplotlib_utilities,master,TRUE,
 MDV_utilities,master,TRUE,
 me,master,FALSE,delete
 molmass,master,TRUE,SBaaS
-MS_utilities,master,TRUE,delete
-multi-omics_analysis,master,FALSE,delete
+MS_utilities,master,FALSE,incomplete
 OpenMS,master,TRUE,
 optGpSampler,master,TRUE,Docker
 physiology_analysis,master,TRUE,SBaaS
@@ -62,5 +57,5 @@ SBaaS_visualization,master,TRUE,SBaaS
 SBaaS_webServer,master,TRUE,SBaaS
 sequencing_analysis,master,TRUE,SBaaS
 sequencing_utilities,master,TRUE,SBaaS
-smartPeak,master,TRUE,
+smartPeak,develop,TRUE,
 thermodynamics,master,TRUE,SBaaS

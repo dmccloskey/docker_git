@@ -1,0 +1,19 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Git	../../Git/git.py	/^class Git():$/;"	kind:class	line:3
+__init__	../../Git/git.py	/^    def __init__($/;"	kind:member	line:8
+__init__.py	../../Git/__init__.py	1;"	kind:file	line:1
+clone_repositories	../../Git/git.py	/^    def clone_repositories(self,branch_only = False):$/;"	kind:member	line:59
+csv	../../Git/git.py	/^import csv,sys,os$/;"	kind:namespace	line:1
+git.py	../../Git/git.py	1;"	kind:file	line:1
+make_sslCert	../../Git/git.py	/^    def make_sslCert(self):$/;"	kind:member	line:152
+os	../../Git/git.py	/^import csv,sys,os$/;"	kind:namespace	line:1
+read_repositories	../../Git/git.py	/^    def read_repositories(self,repositories_csv, delimiter=','):$/;"	kind:member	line:35
+save_repositories	../../Git/git.py	/^    def save_repositories(self,commit_message='Quick save'):$/;"	kind:member	line:118
+switch_branches	../../Git/git.py	/^    def switch_branches(self,repositories = {}, new_branch = False):$/;"	kind:member	line:88
+sync_repositories	../../Git/git.py	/^    def sync_repositories(self,commit_message='Quick save'):$/;"	kind:member	line:135
+sys	../../Git/git.py	/^import csv,sys,os$/;"	kind:namespace	line:1

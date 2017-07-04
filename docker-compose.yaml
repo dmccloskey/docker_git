@@ -4,10 +4,10 @@ services:
   git:
     image: dmccloskey/docker-git
     volumes:
-      - //C/Users/domccl/GitHub/repositories.csv:/home/user/repositories.csv
+      - //C/Users/domccl/GitHub/docker_git/repositories.csv:/home/user/repositories.csv
     restart: always
     networks:
-      - git
+      - git_network
     
 networks:
   git_network:
